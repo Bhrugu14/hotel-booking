@@ -20,7 +20,7 @@ router.post(
         return res.status(400).json({ message: "User already exist" });
       }
       user = new User(req.body);
-      await user.save();
+      const registeredUser = await user.save();
 
       const token = jwt.sign(
         { userId: user.id },
@@ -37,7 +37,11 @@ router.post(
       });
       return res
         .status(200)
-        .json({ token: token, message: "User Registered  Successfully" });
+        .json({
+          token: token,
+          message: "User Registered  Successfully",
+          userId: registeredUser._id,
+        });
     } catch (error) {
       res.status(500).send({ message: "Something went wrong" });
     }

@@ -6,15 +6,16 @@ const apiInstance = axios.create();
 
 apiInstance.interceptors.request.use(
   async (config) => {
-    config.baseURL = import.meta.env.VITE_BASE_URL;
+    // config.baseURL = import.meta.env.VITE_BASE_URL;
+    config.baseURL = "http://localhost:3000/api";
 
     config.headers = {
       ...config.headers,
-      Authorization: Cookies.get("token")
-        ? `Bearer ${Cookies.get("token")}`
+      Authorization: Cookies.get("auth_token")
+        ? `Bearer ${Cookies.get("auth_token")}`
         : "",
     } as AxiosRequestHeaders;
-
+    config.withCredentials = true;
     return config;
   },
   (error) => Promise.reject(error)

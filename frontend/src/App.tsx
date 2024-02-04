@@ -7,8 +7,21 @@ import {
 import Layout from "./layouts/Layouts";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import React from "react";
+import SingIn from "./pages/SingIn";
+import { useVerifyToken } from "./api/queryHooks/usersHook";
 
 function App() {
+  const [isHydration, setHydration] = React.useState(false);
+  const { isLoading } = useVerifyToken();
+  React.useEffect(() => {
+    setHydration(true);
+  }, []);
+
+  if (!isHydration && !isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Router>
       <Routes>
@@ -33,6 +46,14 @@ function App() {
           element={
             <Layout>
               <Register />
+            </Layout>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <Layout>
+              <SingIn />
             </Layout>
           }
         />

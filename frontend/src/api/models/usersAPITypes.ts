@@ -10,3 +10,12 @@ export interface User {
   lastName: string;
   __v: number;
 }
+
+export interface GetUserRegister {
+  token?: string;
+  message?: string;
+  userId: string;
+}
+export interface GetVerifyToken {
+  userId: string;
+}

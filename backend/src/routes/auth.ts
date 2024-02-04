@@ -4,6 +4,7 @@ import { validationResult } from "express-validator";
 import User from "../models/users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 router.post(
@@ -36,7 +37,11 @@ router.post(
           secure: process.env.NODE_ENV === "production",
           maxAge: 86400000,
         });
-        return res.status(200).json({ userId: user._id });
+        return res.status(200).json({
+          token: token,
+          message: "User Logged In Successfully",
+          userId: user._id,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -44,4 +49,16 @@ router.post(
     }
   }
 );
+
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+  res.status(200).send({ userId: req.userId });
+});
+
+router.post("/logout", (req: Request, res: Response) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+  res.send();
+});
+
 export default router;
