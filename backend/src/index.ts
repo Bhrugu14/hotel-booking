@@ -25,5 +25,5 @@ app.use("/api/users", userRoutes);
 app.use("/api/getall", allUsersRoutes);
 
 app.listen(3000, () => {
-  console.log("SERVER IS RUNNING");
+  console.log("SERVER IS RUNNING 3000");
 });
