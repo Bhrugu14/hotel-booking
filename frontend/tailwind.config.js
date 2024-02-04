@@ -5,7 +5,13 @@ export default {
     extend: {
       colors: { primary: "#0047AB" },
       container: {
-        padding: "10rem",
+        padding: {
+          DEFAULT: "2rem",
+          sm: "3rem",
+          lg: "5rem",
+          xl: "8rem",
+          "2xl": "10rem",
+        },
       },
     },
   },
