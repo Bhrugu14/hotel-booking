@@ -11,6 +11,7 @@ declare global {
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies["auth_token"];
+  console.log("PATH", process.env.FRONTEND_URL);
   if (!token) {
     return res
       .status(401)
