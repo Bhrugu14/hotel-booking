@@ -37,11 +37,12 @@ export const useRegisterUser = () => {
       qc.invalidateQueries({ queryKey: ["useVerifyToken"] });
       navigate("/");
     },
-    onError: () => {
+    onError: (error: AxiosError<{ message: string }>) => {
+      const message = error?.response?.data?.message;
       toast.update("registerUser", {
         isLoading: false,
         type: "error",
-        render: "Something went wrong",
+        render: message ?? "Something went wrong",
         autoClose: 2000,
       });
     },
