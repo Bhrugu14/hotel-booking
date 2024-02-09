@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,tsx,jsx}"],
   theme: {
     extend: {
-      colors: { primary: "#0047AB" },
+      colors: { primary: "#0047AB", "primary-dark": "#0f00ab" },
       container: {
         padding: {
           DEFAULT: "1rem",
