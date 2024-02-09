@@ -33,15 +33,14 @@ router.post(
       res.cookie("auth_token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
         maxAge: 86400000,
       });
-      return res
-        .status(200)
-        .json({
-          token: token,
-          message: "User Registered  Successfully",
-          userId: registeredUser._id,
-        });
+      return res.status(200).json({
+        token: token,
+        message: "User Registered  Successfully",
+        userId: registeredUser._id,
+      });
     } catch (error) {
       res.status(500).send({ message: "Something went wrong" });
     }
