@@ -6,7 +6,7 @@ const apiInstance = axios.create();
 
 apiInstance.interceptors.request.use(
   async (config) => {
-    config.baseURL = import.meta.env.VITE_BASE_URL;
+    config.baseURL = import.meta.env.VITE_BASE_URL || "";
     // config.baseURL = "http://localhost:3000/api";
 
     config.headers = {
