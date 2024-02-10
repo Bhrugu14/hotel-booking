@@ -6,11 +6,8 @@ import { Link } from "react-router-dom";
 import { useUserLogin } from "../api/queryHooks/usersHook";
 
 export type LoginFormData = {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
-  confirmPassword: string;
 };
 
 const schema = z.object({
@@ -44,8 +41,8 @@ function SingIn() {
           <input
             type="email"
             className="input-primary"
-            {...register("email", { required: "This field is required" })}
-          ></input>
+            {...register("email")}
+          />
           {errors.email && (
             <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
               {errors.email.message}
@@ -57,14 +54,8 @@ function SingIn() {
           <input
             type="password"
             className="input-primary"
-            {...register("password", {
-              required: "This field is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            })}
-          ></input>
+            {...register("password")}
+          />
           {errors.password && (
             <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
               {errors.password.message}

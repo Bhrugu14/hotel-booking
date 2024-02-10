@@ -1,4 +1,5 @@
 import { RegisterFormData } from "../../pages/Register";
+import { LoginFormData } from "../../pages/SingIn";
 import baseInstance from "../instaces/baseInstace";
 import {
   GetAllUsers,
@@ -19,7 +20,7 @@ export const usersAPIs = {
     const { data } = await baseInstance.post(url, userData);
     return data;
   },
-  loginUser: async (userData: RegisterFormData): Promise<GetUserRegister> => {
+  loginUser: async (userData: LoginFormData): Promise<GetUserRegister> => {
     const url = `/auth/login`;
     const { data } = await baseInstance.post(url, userData);
     return data;
