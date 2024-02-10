@@ -1,5 +1,3 @@
-import React from "react";
-
 interface RatingProps {
   onclick: (val: number) => void;
   value: number;

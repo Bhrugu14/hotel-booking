@@ -1,10 +1,10 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { hotelsAPI } from "../network/hotelAPI";
 import { AxiosError } from "axios";
 
 export const useAddHotel = () => {
-  const qc = useQueryClient();
+  //   const qc = useQueryClient();
   // const navigate = useNavigate();
 
   return useMutation({
