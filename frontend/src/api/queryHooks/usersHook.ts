@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useAuthStore } from "../../store/AuthStore";
+import Cookies from "js-cookie";
 
 export const useGetAllUsers = () => {
   return useQuery({
@@ -70,6 +71,7 @@ export const useUserLogin = () => {
         render: "Logged In!",
         autoClose: 2000,
       });
+      Cookies.remove("auth_token");
       qc.invalidateQueries({ queryKey: ["useVerifyToken"] });
       navigate("/");
     },
