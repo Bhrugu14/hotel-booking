@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
       <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
       <Header />
       <Hero />
-      <div className="container mx-auto py-10 flex-1">{children}</div>
+      <div className="container mx-auto pb-10 pt-5 flex-1">{children}</div>
       <Footer />
     </div>
   );
