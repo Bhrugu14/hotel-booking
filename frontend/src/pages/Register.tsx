@@ -38,7 +38,6 @@ const Register = () => {
 
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>({ resolver: zodResolver(schema) });
@@ -54,10 +53,7 @@ const Register = () => {
         <div className="flex flex-col md:flex-row gap-5 ">
           <label className="text-gray-700 text-base font-bold flex-1 relative">
             First Name
-            <input
-              className="input-primary"
-              {...register("firstName", { required: "This field is required" })}
-            />
+            <input className="input-primary" {...register("firstName")} />
             {errors.firstName && (
               <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
                 {errors.firstName.message}
@@ -66,10 +62,7 @@ const Register = () => {
           </label>
           <label className="text-gray-700 text-base font-bold flex-1 relative">
             Last Name
-            <input
-              className="input-primary"
-              {...register("lastName", { required: "This field is required" })}
-            />
+            <input className="input-primary" {...register("lastName")} />
             {errors.lastName && (
               <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
                 {errors.lastName.message}
@@ -82,8 +75,8 @@ const Register = () => {
           <input
             type="email"
             className="input-primary"
-            {...register("email", { required: "This field is required" })}
-          ></input>
+            {...register("email")}
+          />
           {errors.email && (
             <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
               {errors.email.message}
@@ -95,14 +88,8 @@ const Register = () => {
           <input
             type="password"
             className="input-primary"
-            {...register("password", {
-              required: "This field is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            })}
-          ></input>
+            {...register("password")}
+          />
           {errors.password && (
             <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
               {errors.password.message}
@@ -114,16 +101,8 @@ const Register = () => {
           <input
             type="password"
             className="input-primary"
-            {...register("confirmPassword", {
-              validate: (val) => {
-                if (!val) {
-                  return "This field is required";
-                } else if (watch("password") !== val) {
-                  return "Your passwords do no match";
-                }
-              },
-            })}
-          ></input>
+            {...register("confirmPassword")}
+          />
           {errors.confirmPassword && (
             <span className="text-red-500 absolute -bottom-4 left-0 text-xs font-normal">
               {errors.confirmPassword.message}

@@ -3,10 +3,10 @@ export interface BrowserLinksType {
   name: string;
   link: string;
 }
-const MenuLinks = ({ name }: BrowserLinksType) => {
+const MenuLinks = ({ name, link }: BrowserLinksType) => {
   return (
     <div className="flex items-center px-2 rounded-md text-base font-semibold text-white hover:underline mx-2">
-      <Link to={"/"}>{name}</Link>
+      <Link to={link}>{name}</Link>
     </div>
   );
 };
