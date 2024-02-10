@@ -57,6 +57,8 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
 
 router.post("/logout", (req: Request, res: Response) => {
   res.cookie("auth_token", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
     expires: new Date(0),
     sameSite: "none",
   });
