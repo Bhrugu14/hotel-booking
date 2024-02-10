@@ -11,6 +11,7 @@ import React from "react";
 import SingIn from "./pages/SingIn";
 import { useVerifyToken } from "./api/queryHooks/usersHook";
 import AddHotel from "./pages/AddHotel";
+import MyHotels from "./pages/MyHotels";
 
 function App() {
   const [isHydration, setHydration] = React.useState(false);
@@ -60,6 +61,14 @@ function App() {
         />
         <Route
           path="/my-hotels"
+          element={
+            <Layout>
+              <MyHotels />
+            </Layout>
+          }
+        />
+        <Route
+          path="/add-hotel"
           element={
             <Layout>
               <AddHotel />

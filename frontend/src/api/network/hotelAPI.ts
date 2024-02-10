@@ -11,4 +11,9 @@ export const hotelsAPI = {
     });
     return data;
   },
+  getMyHotel: async (): Promise<HotelFormData[]> => {
+    const url = `/my-hotels/`;
+    const { data } = await baseInstance.get(url);
+    return data;
+  },
 };
