@@ -35,7 +35,7 @@ app.use("/api/my-hotels", myHotelRoutes);
 
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
-});
+}); //deployed on render preventing 404 page error on refresh
 
 app.listen(3000, () => {
   console.log("SERVER IS RUNNING 3000");
