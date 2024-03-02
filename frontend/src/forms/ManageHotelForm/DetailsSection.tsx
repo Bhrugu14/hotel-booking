@@ -1,6 +1,7 @@
 import { useFormContext } from "react-hook-form";
 import { HotelFormData } from "./ManageHotelForm";
 import Rating from "../../components/Rating";
+import { useParams } from "react-router-dom";
 
 const DetailsSection = () => {
   const {
@@ -10,10 +11,12 @@ const DetailsSection = () => {
     getValues,
     trigger,
   } = useFormContext<HotelFormData>();
-
+  const { hotelId } = useParams();
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-3xl font-bold mb-3">Add Hotel</h1>
+      <h1 className="text-3xl font-bold mb-3">
+        {hotelId ? "Edit Hotel" : "Add Hotel"}
+      </h1>
       <label className="text-gray-700 text-base font-bold flex-1 ">
         Name
         <input type="text" className="input-primary" {...register("name")} />
@@ -68,6 +71,11 @@ const DetailsSection = () => {
           min={1}
           className="input-primary"
           {...register("pricePerNight")}
+          value={
+            getValues("pricePerNight")
+              ? getValues("pricePerNight").toString()
+              : ""
+          }
         />
         {errors.pricePerNight && (
           <span className="text-red-500 text-xs font-normal">

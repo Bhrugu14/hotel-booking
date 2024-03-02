@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { hotelsAPI } from "../network/hotelAPI";
 import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const useAddHotel = () => {
   //   const qc = useQueryClient();
@@ -19,9 +19,7 @@ export const useAddHotel = () => {
         progress: 0,
       });
     },
-    onSuccess: (res) => {
-      console.log("RESPONSE", res);
-
+    onSuccess: () => {
       toast.update("AddHotelToast", {
         isLoading: false,
         type: "success",
@@ -46,6 +44,50 @@ export const useAddHotel = () => {
 export const useGetMyHotel = () => {
   return useQuery({
     queryKey: ["useGetMyHotel"],
-    queryFn: hotelsAPI.getMyHotel,
+    queryFn: hotelsAPI.getMyHotels,
+  });
+};
+export const useGetHotelById = () => {
+  const { hotelId } = useParams();
+  return useQuery({
+    queryKey: ["useGetHotelById", hotelId],
+    queryFn: async () => {
+      if (!hotelId) {
+        throw new Error("no hotel with this id");
+      }
+      return await hotelsAPI.getHotelById(hotelId);
+    },
+    enabled: !!hotelId,
+  });
+};
+
+export const useEditMyHotel = () => {
+  const navigate = useNavigate();
+  const { hotelId } = useParams();
+  return useMutation({
+    mutationKey: ["useEditMyHotel"],
+    mutationFn: async (body: FormData) => {
+      if (!hotelId) {
+        throw new Error("no hotel with this id");
+      }
+      return await hotelsAPI.editHotelById(body, hotelId);
+    },
+    onMutate: () => {
+      toast("Editing hotel...", {
+        type: "info",
+        toastId: "editHotel",
+        isLoading: true,
+        progress: 0,
+      });
+    },
+    onSuccess() {
+      toast.update("editHotel", {
+        isLoading: false,
+        type: "success",
+        render: "Hotel Updated!",
+        autoClose: 2000,
+      });
+      navigate("/my-hotels");
+    },
   });
 };

@@ -3,12 +3,11 @@ import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 
 const AddHotel = () => {
   const { mutate, isPending } = useAddHotel();
-  const handleSave = (hotelFormData: FormData) => {
-    console.log("Data", hotelFormData);
-    mutate(hotelFormData);
-  };
-
-  return <ManageHotelForm onSave={handleSave} isLoading={isPending} />;
+  return (
+    <section>
+      <ManageHotelForm onSave={mutate} isLoading={isPending} />
+    </section>
+  );
 };
 
 export default AddHotel;

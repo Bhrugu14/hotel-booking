@@ -7,8 +7,8 @@ import { useEffect } from "react";
 import FacilitiesSection from "./FacilitiesSection";
 import { HotelType } from "../../config/hotel-options-config";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Button from "../../components/Button";
+import { schema } from "./formSchema";
 
 export type HotelFormData = {
   name: string;
@@ -31,98 +31,6 @@ type Props = {
   isLoading: boolean;
 };
 
-const schema = z.object({
-  name: z.string().min(3, { message: "at least 3 characters required" }),
-  city: z.string().min(3, { message: "at least 3 characters required" }),
-  country: z.string().min(3, { message: "at least 3 characters required" }),
-  description: z.string().min(3, { message: "at least 3 characters required" }),
-  type: z.any().refine(
-    (v) => {
-      if (v) {
-        return v.length > 0;
-      } else {
-        return false;
-      }
-    },
-    { message: "select at least one" }
-  ),
-  pricePerNight: z
-    .string()
-    .min(1, { message: "at least 1 characters required" })
-    .refine(
-      (v) => {
-        const n = Number(v);
-        if (isNaN(n)) {
-          return false;
-        } else {
-          return n > 0;
-        }
-      },
-      { message: "must be greater then zero" }
-    ),
-  starRating: z.number().min(1, { message: "Rating is required" }),
-  facilities: z.array(z.string()).superRefine((val, ctx) => {
-    if (val.length < 1) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.too_small,
-        minimum: 1,
-        type: "array",
-        inclusive: true,
-        message: "Select At least one",
-      });
-    }
-  }),
-  imageFiles: z.custom<FileList>().superRefine((val, ctx) => {
-    if (val.length < 1) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.too_small,
-        minimum: 1,
-        type: "array",
-        inclusive: true,
-        message: "Select At least one",
-      });
-    }
-    if (val.length > 6) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.too_big,
-        maximum: 6,
-        type: "array",
-        inclusive: true,
-        message: "Select At least one",
-      });
-    }
-  }),
-  imageUrls: z.any(),
-  adultCount: z
-    .string()
-    .min(1, { message: "at least 1 characters required" })
-    .refine(
-      (v) => {
-        const n = Number(v);
-        if (isNaN(n)) {
-          return false;
-        } else {
-          return n > 0;
-        }
-      },
-      { message: "must be greater then zero" }
-    ),
-  childCount: z
-    .string()
-    .min(1, { message: "at least 1 characters required" })
-    .refine(
-      (v) => {
-        const n = Number(v);
-        if (isNaN(n)) {
-          return false;
-        } else {
-          return n >= 0;
-        }
-      },
-      { message: "must be greater then zero" }
-    ),
-});
-
 const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   const formMethods = useForm<HotelFormData>({
     resolver: zodResolver(schema),
@@ -134,8 +42,6 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   }, [hotel, reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
-    console.log("FORm", formDataJson);
-
     const formData = new FormData();
     if (hotel) {
       formData.append("hotelId", hotel._id);

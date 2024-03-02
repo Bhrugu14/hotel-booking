@@ -4,12 +4,27 @@ import { useAuthStore } from "../store/AuthStore";
 import { useUserLogout } from "../api/queryHooks/usersHook";
 import { BrowserLinks } from "../utils/constants";
 import MenuLinks from "./MenuLinks";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { isLoggedIn } = useAuthStore();
   const { mutate } = useUserLogout();
+  const [navColor, setNavColor] = useState("bg-primary");
+  const listenScrollEvent = () => {
+    window.scrollY > 20
+      ? setNavColor("bg-primary-dark")
+      : setNavColor("bg-primary");
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => {
+      window.removeEventListener("scroll", listenScrollEvent);
+    };
+  }, []);
   return (
-    <div className="bg-primary py-6">
+    <div
+      className={`${navColor} py-6 fixed w-full z-20 transition-all ease-in duration-300`}
+    >
       <div className="container mx-auto items-center flex justify-between">
         <span className="text-2xl text-white font-bold tracking-tight">
           <Link to={"/"}>BookHoliday.com</Link>

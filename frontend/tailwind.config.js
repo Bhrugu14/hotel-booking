@@ -13,6 +13,15 @@ export default {
           "2xl": "10rem",
         },
       },
+      keyframes: {
+        sliding: {
+          "0%, 100%": { transform: "translateX(0%)" },
+          "50%": { transform: "translateX(30%)" },
+        },
+      },
+      animation: {
+        "anime-sliding": "sliding 1s linear infinite",
+      },
     },
   },
   plugins: [],
