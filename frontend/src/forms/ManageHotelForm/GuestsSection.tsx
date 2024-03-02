@@ -5,6 +5,7 @@ const GuestsSection = () => {
   const {
     register,
     formState: { errors },
+    getValues,
   } = useFormContext<HotelFormData>();
 
   return (
@@ -18,6 +19,9 @@ const GuestsSection = () => {
             type="number"
             min={1}
             {...register("adultCount")}
+            value={
+              getValues("adultCount") ? getValues("adultCount").toString() : ""
+            }
           />
           {errors.adultCount?.message && (
             <span className="text-red-500 text-xs font-normal">
@@ -32,6 +36,9 @@ const GuestsSection = () => {
             type="number"
             min={0}
             {...register("childCount")}
+            value={
+              getValues("childCount") ? getValues("childCount").toString() : ""
+            }
           />
           {errors.childCount?.message && (
             <span className="text-red-500 text-xs font-normal">

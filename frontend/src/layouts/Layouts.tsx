@@ -9,9 +9,10 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen transition-all relative">
       <ToastContainer pauseOnHover={false} pauseOnFocusLoss={false} />
       <Header />
+      <div className="pt-[84px]" />
       <Hero />
       <div className="container mx-auto pb-10 pt-5 flex-1">{children}</div>
       <Footer />

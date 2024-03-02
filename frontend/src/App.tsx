@@ -12,9 +12,13 @@ import SingIn from "./pages/SingIn";
 import { useVerifyToken } from "./api/queryHooks/usersHook";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
+import EditHotel from "./pages/EditHotel";
+import ScrollToTop from "./utils/scrollToTop";
+import { useAuthStore } from "./store/AuthStore";
 
 function App() {
   const [isHydration, setHydration] = React.useState(false);
+  const { isLoggedIn } = useAuthStore();
   const { isLoading } = useVerifyToken();
   React.useEffect(() => {
     setHydration(true);
@@ -59,22 +63,35 @@ function App() {
             </Layout>
           }
         />
-        <Route
-          path="/my-hotels"
-          element={
-            <Layout>
-              <MyHotels />
-            </Layout>
-          }
-        />
-        <Route
-          path="/add-hotel"
-          element={
-            <Layout>
-              <AddHotel />
-            </Layout>
-          }
-        />
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/add-hotel"
+              element={
+                <Layout>
+                  <AddHotel />
+                </Layout>
+              }
+            />
+            <Route
+              path="/edit-hotel/:hotelId"
+              element={
+                <Layout>
+                  <ScrollToTop />
+                  <EditHotel />
+                </Layout>
+              }
+            />
+            <Route
+              path="/my-hotels"
+              element={
+                <Layout>
+                  <MyHotels />
+                </Layout>
+              }
+            />
+          </>
+        )}
         <Route path="*" element={<Navigate to={"/"} />}></Route>
       </Routes>
     </Router>
