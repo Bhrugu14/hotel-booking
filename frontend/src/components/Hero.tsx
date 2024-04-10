@@ -13,7 +13,7 @@ const Hero = () => {
   const { pathname } = useLocation();
   const [navColor, setNavColor] = useState("bg-primary");
   const listenScrollEvent = () => {
-    if (window.scrollY > 250) {
+    if (window.scrollY > 200) {
       setNavColor("bg-primary-dark");
     } else {
       setNavColor("bg-primary");
