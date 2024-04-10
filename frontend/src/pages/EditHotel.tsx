@@ -5,6 +5,7 @@ import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 function EditHotel() {
   const { data, isLoading, isError } = useGetHotelById();
   const { mutate } = useEditMyHotel();
+
   return (
     <section>
       {isError && (
