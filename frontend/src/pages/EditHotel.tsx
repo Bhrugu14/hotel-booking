@@ -7,7 +7,7 @@ function EditHotel() {
   const { mutate } = useEditMyHotel();
 
   return (
-    <section>
+    <section className="mt-20">
       {isError && (
         <div className="flex w-full items-center justify-center text-lg font-semibold text-red-600">
           <SVGIcon

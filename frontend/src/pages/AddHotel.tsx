@@ -4,7 +4,7 @@ import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 const AddHotel = () => {
   const { mutate, isPending } = useAddHotel();
   return (
-    <section>
+    <section className="mt-20">
       <ManageHotelForm onSave={mutate} isLoading={isPending} />
     </section>
   );
