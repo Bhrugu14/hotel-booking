@@ -33,7 +33,7 @@ function SingIn() {
     mutate(data);
   });
   return (
-    <div className="max-w-[650px] mx-auto bg-white/80 p-5 rounded-lg shadow-lg border shadow-gray-300 mt-10">
+    <div className="max-w-[650px] mx-auto bg-white/80 p-5 rounded-lg shadow-lg border shadow-gray-300 mt-20">
       <form className="flex flex-col gap-5" onSubmit={onSubmit}>
         <h2 className="text-3xl font-bold">Login User</h2>
         <label className="text-gray-700 text-base font-bold flex-1 relative">
